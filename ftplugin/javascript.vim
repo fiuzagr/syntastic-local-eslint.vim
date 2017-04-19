@@ -15,7 +15,9 @@ endfun
 "  or an empty string if no executable found
 fun! s:GetEslintExec (node_modules)
   let eslint_guess = a:node_modules is '' ? '' : a:node_modules . '.bin/eslint'
-  return exepath(eslint_guess)
+  let eslint_d_guess = a:node_modules is '' ? '' : a:node_modules . '.bin/eslint_d'
+  let path_eslint_d = exepath(eslint_d_guess)
+  return path_eslint_d isnot '' ? path_eslint_d : exepath(eslint_guess)
 endfun
 
 " if eslint_exec found successfully, set it for the current buffer
